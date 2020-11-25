@@ -1,4 +1,4 @@
-package com.service.user.service;
+package com.service.user.service.user;
 
 import com.service.user.entity.AddressEntity;
 import com.service.user.entity.UserEntity;
@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface UserService extends UserDetailsService {
 
-    UserEntity createUser(UserDetailsRequest user);
+    UserEntity createUser(UserDetailsRequest userDetailsRequest);
 
     UserEntity getUserByUserName(String email);
 

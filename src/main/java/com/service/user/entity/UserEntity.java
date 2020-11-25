@@ -9,8 +9,8 @@ import java.io.Serializable;
 import java.util.List;
 
 @Data
-@Entity(name = "User")
-@Table(name = "USER", uniqueConstraints = {
+@Entity(name = "Users")
+@Table(name = "USERS", uniqueConstraints = {
         @UniqueConstraint(columnNames = "USER_ID"),
         @UniqueConstraint(columnNames = "USER_EMAIL_ID")
 })

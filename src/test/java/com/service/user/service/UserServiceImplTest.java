@@ -6,6 +6,7 @@ import com.service.user.entity.UserEntity;
 import com.service.user.model.request.UserDetailsRequest;
 import com.service.user.model.request.UserUpdateRequest;
 import com.service.user.repository.UserRepository;
+import com.service.user.service.user.UserServiceImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

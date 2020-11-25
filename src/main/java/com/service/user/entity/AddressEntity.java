@@ -8,8 +8,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Data
-@Entity(name = "Address")
-@Table(name = "ADDRESS", uniqueConstraints = {
+@Entity(name = "Addresses")
+@Table(name = "ADDRESSES", uniqueConstraints = {
         @UniqueConstraint(columnNames = "ADDRESS_ID")
 })
 public class AddressEntity implements Serializable {

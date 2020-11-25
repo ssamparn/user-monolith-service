@@ -1,4 +1,4 @@
-package com.service.user.service;
+package com.service.user.service.user;
 
 import com.service.user.entity.AddressEntity;
 import com.service.user.entity.UserEntity;

@@ -1,4 +1,4 @@
-package com.service.user.service;
+package com.service.user.service.user;
 
 import com.service.user.controller.exception.UserServiceException;
 import com.service.user.entity.AddressEntity;

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.service.user.config.AppContext;
 import com.service.user.entity.UserEntity;
 import com.service.user.model.request.UserLoginRequest;
-import com.service.user.service.UserService;
+import com.service.user.service.user.UserService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.authentication.AuthenticationManager;
