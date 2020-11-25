@@ -27,13 +27,13 @@ public class UserEntity implements Serializable {
     @Column(name = "USER_ID", unique = true, nullable = false, updatable = false)
     private String userId;
 
-    @Column(name = "USER_FIRST_NAME", nullable = false)
+    @Column(name = "USER_FIRST_NAME", length = 50, nullable = false)
     private String firstName;
 
-    @Column(name = "USER_LAST_NAME", nullable = false)
+    @Column(name = "USER_LAST_NAME", length = 50, nullable = false)
     private String lastName;
 
-    @Column(name = "USER_EMAIL_ID", nullable = false)
+    @Column(name = "USER_EMAIL_ID", length = 120, nullable = false)
     private String email;
 
     @Column(name = "USER_LOGIN_PASSWORD", nullable = false)
