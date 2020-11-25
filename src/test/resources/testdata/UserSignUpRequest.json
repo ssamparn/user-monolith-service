@@ -1,0 +1,22 @@
+{
+  "firstName":"sdsdv",
+  "lastName":"Diernluyhujuki",
+  "email":"sner9juhgyuytredfgh87njlg",
+  "password":"Sasha@rr1991",
+  "addresses":[
+    {
+      "city": "Vancuver",
+      "country": "Canada",
+      "streetName": "123 Street",
+      "postalCode": "3555WN",
+      "type": "billing"
+    },
+    {
+      "city": "Toronto",
+      "country": "US",
+      "streetName": "123 Street of Vancouver",
+      "postalCode": "4567FG",
+      "type": "delivery"
+    }
+  ]
+}
