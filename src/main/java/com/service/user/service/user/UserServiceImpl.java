@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDetails loadUserByUsername(String eMail) throws UsernameNotFoundException {
 
-        UserEntity userEntityByEmail = userRepository.findByEmail(eMail);
+        UserEntity userEntityByEmail = userRepository.findUserByEmail(eMail);
 
         if (userEntityByEmail == null) {
             throw new UsernameNotFoundException(eMail);
@@ -92,7 +92,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserEntity getUserByUserName(String email) {
-        UserEntity userEntityByEmail = userRepository.findByEmail(email);
+        UserEntity userEntityByEmail = userRepository.findUserByEmail(email);
 
         if (userEntityByEmail == null) {
             throw new UsernameNotFoundException(email);
@@ -102,7 +102,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserEntity getUserByUserId(String userId) {
-        UserEntity userEntityByUserId = userRepository.findByUserId(userId);
+        UserEntity userEntityByUserId = userRepository.findUserByUserId(userId);
 
         if (userEntityByUserId == null) {
             throw new UsernameNotFoundException(userId);
@@ -113,7 +113,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserEntity updateUser(String userId, UserUpdateRequest userUpdateRequest) {
-        UserEntity userEntityByUserId = userRepository.findByUserId(userId);
+        UserEntity userEntityByUserId = userRepository.findUserByUserId(userId);
 
         if (userEntityByUserId == null) {
             throw new UsernameNotFoundException(userId);
@@ -129,7 +129,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUser(String userId) {
-        UserEntity userEntityByUserId = userRepository.findByUserId(userId);
+        UserEntity userEntityByUserId = userRepository.findUserByUserId(userId);
 
         if (userEntityByUserId == null) {
             throw new UsernameNotFoundException(userId);
@@ -152,7 +152,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<AddressEntity> getAddressesByUserId(String userId) {
-        UserEntity addressesByUserId = userRepository.findByUserId(userId);
+        UserEntity addressesByUserId = userRepository.findUserByUserId(userId);
 
         return addressesByUserId.getAddresses();
     }

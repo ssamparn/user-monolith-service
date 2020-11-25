@@ -32,7 +32,7 @@ class UserRepositoryTest {
 
         entityManager.persist(userEntity);
 
-        UserEntity userEntityByEmail = userRepository.findByEmail("EmailAddress");
+        UserEntity userEntityByEmail = userRepository.findUserByEmail("EmailAddress");
 
         Assertions.assertEquals("EmailAddress", userEntityByEmail.getEmail());
     }
@@ -49,7 +49,7 @@ class UserRepositoryTest {
 
         entityManager.persist(userEntity);
 
-        UserEntity userEntityByUserId = userRepository.findByUserId("UserId");
+        UserEntity userEntityByUserId = userRepository.findUserByUserId("UserId");
 
         Assertions.assertEquals("UserId", userEntityByUserId.getUserId());
     }

@@ -63,7 +63,7 @@ public class UserServiceImplTest {
         userEntity.setEncryptedPassword("EncryptedPassword");
         userEntity.setId(1L);
 
-        when(userRepositoryMock.findByEmail(anyString())).thenReturn(userEntity);
+        when(userRepositoryMock.findUserByEmail(anyString())).thenReturn(userEntity);
 
         UserDetails userDetails = userService.loadUserByUsername(anyString());
 
@@ -72,7 +72,7 @@ public class UserServiceImplTest {
 
     @Test
     final void loadUserByUserName_ExceptionThrown_Test() {
-        when(userRepositoryMock.findByEmail(anyString())).thenReturn(null);
+        when(userRepositoryMock.findUserByEmail(anyString())).thenReturn(null);
 
         Assertions.assertThrows(UsernameNotFoundException.class, () -> {
             UserDetails userDetails = userService.loadUserByUsername(anyString());
@@ -131,7 +131,7 @@ public class UserServiceImplTest {
         userEntity.setEncryptedPassword("EncryptedPassword");
         userEntity.setId(1L);
 
-        when(userRepositoryMock.findByEmail(anyString())).thenReturn(userEntity);
+        when(userRepositoryMock.findUserByEmail(anyString())).thenReturn(userEntity);
 
         UserEntity userByUserName = userService.getUserByUserName("unit_test@gmail.com");
 
@@ -141,13 +141,13 @@ public class UserServiceImplTest {
         Assertions.assertEquals("lastName", userByUserName.getLastName());
         Assertions.assertEquals("EncryptedPassword", userByUserName.getEncryptedPassword());
 
-        Mockito.verify(userRepositoryMock, times(1)).findByEmail(anyString());
+        Mockito.verify(userRepositoryMock, times(1)).findUserByEmail(anyString());
     }
 
     @Test
     final void getUserByUserName_ExceptionThrown_Test() {
 
-        when(userRepositoryMock.findByEmail(anyString())).thenReturn(null);
+        when(userRepositoryMock.findUserByEmail(anyString())).thenReturn(null);
 
         Assertions.assertThrows(UsernameNotFoundException.class, () -> {
             userService.getUserByUserName(anyString());
@@ -165,16 +165,16 @@ public class UserServiceImplTest {
         userEntity.setEncryptedPassword("EncryptedPassword");
         userEntity.setId(1L);
 
-        when(userRepositoryMock.findByUserId(anyString())).thenReturn(userEntity);
+        when(userRepositoryMock.findUserByUserId(anyString())).thenReturn(userEntity);
 
         userService.getUserByUserId("userId");
 
-        Mockito.verify(userRepositoryMock, times(1)).findByUserId(anyString());
+        Mockito.verify(userRepositoryMock, times(1)).findUserByUserId(anyString());
     }
 
     @Test
     final void getUserByUserId_ExceptionThrown_Test() {
-        when(userRepositoryMock.findByUserId(anyString())).thenReturn(null);
+        when(userRepositoryMock.findUserByUserId(anyString())).thenReturn(null);
 
         Assertions.assertThrows(UsernameNotFoundException.class, () -> {
             userService.getUserByUserId(anyString());
@@ -197,7 +197,7 @@ public class UserServiceImplTest {
         userUpdateRequest.setLastName("LastName");
         userUpdateRequest.setPassword("Password");
 
-        when(userRepositoryMock.findByUserId(anyString())).thenReturn(userEntity);
+        when(userRepositoryMock.findUserByUserId(anyString())).thenReturn(userEntity);
 
         userService.updateUser("userId", userUpdateRequest);
 
@@ -212,7 +212,7 @@ public class UserServiceImplTest {
         userUpdateRequest.setLastName("LastName");
         userUpdateRequest.setPassword("Password");
 
-        when(userRepositoryMock.findByUserId(anyString())).thenReturn(null);
+        when(userRepositoryMock.findUserByUserId(anyString())).thenReturn(null);
 
         Assertions.assertThrows(UsernameNotFoundException.class, () -> {
             userService.updateUser(anyString(), userUpdateRequest);
@@ -231,7 +231,7 @@ public class UserServiceImplTest {
         userEntity.setEncryptedPassword("EncryptedPassword");
         userEntity.setId(1L);
 
-        when(userRepositoryMock.findByUserId(anyString())).thenReturn(userEntity);
+        when(userRepositoryMock.findUserByUserId(anyString())).thenReturn(userEntity);
 
         userService.deleteUser(anyString());
 
@@ -241,7 +241,7 @@ public class UserServiceImplTest {
     @Test
     final void deleteUser_ExceptionThrown_Test() {
 
-        when(userRepositoryMock.findByUserId(anyString())).thenReturn(null);
+        when(userRepositoryMock.findUserByUserId(anyString())).thenReturn(null);
 
         Assertions.assertThrows(UsernameNotFoundException.class, () -> {
             userService.deleteUser(anyString());
@@ -271,7 +271,7 @@ public class UserServiceImplTest {
         userEntity.setLastName("lastName");
         userEntity.setEncryptedPassword("EncryptedPassword");
         userEntity.setId(1L);
-        when(userRepositoryMock.findByUserId(anyString())).thenReturn(userEntity);
+        when(userRepositoryMock.findUserByUserId(anyString())).thenReturn(userEntity);
 
         List<AddressEntity> addressEntityListByUserId = userService.getAddressesByUserId("userId");
 
