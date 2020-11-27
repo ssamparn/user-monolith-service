@@ -1,9 +1,10 @@
-package com.service.user.security;
+package com.service.user.security.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.service.user.config.AppContext;
 import com.service.user.entity.UserEntity;
 import com.service.user.model.request.UserLoginRequest;
+import com.service.user.properties.SecurityConstants;
 import com.service.user.service.user.UserService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

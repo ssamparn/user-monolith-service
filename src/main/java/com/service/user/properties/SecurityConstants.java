@@ -1,7 +1,6 @@
-package com.service.user.security;
+package com.service.user.properties;
 
 import com.service.user.config.AppContext;
-import com.service.user.properties.UserServiceProperties;
 
 public class SecurityConstants {
 

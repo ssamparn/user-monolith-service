@@ -1,5 +1,6 @@
-package com.service.user.security;
+package com.service.user.security.filter;
 
+import com.service.user.properties.SecurityConstants;
 import io.jsonwebtoken.Jwts;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
