@@ -13,28 +13,28 @@ public enum ErrorMessages {
     COULD_NOT_DELETE_RECORD ("Could not delete record", HttpStatus.CONFLICT),
     EMAIL_ADDRESS_NOT_VERIFIED ("Email address could not be verified", HttpStatus.FORBIDDEN);
 
-    private String errorMessage;
-    private HttpStatus errorCode;
+    private String message;
+    private HttpStatus statusCode;
 
-    ErrorMessages(String errorMessage, HttpStatus errorCode) {
-        this.errorMessage = errorMessage;
-        this.errorCode = errorCode;
+    ErrorMessages(String message, HttpStatus statusCode) {
+        this.message = message;
+        this.statusCode = statusCode;
     }
 
-    public String getErrorMessage() {
-        return errorMessage;
+    public String getMessage() {
+        return message;
     }
 
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
-    public HttpStatus getErrorCode() {
-        return errorCode;
+    public HttpStatus getStatusCode() {
+        return statusCode;
     }
 
-    public void setErrorCode(HttpStatus errorCode) {
-        this.errorCode = errorCode;
+    public void setStatusCode(HttpStatus statusCode) {
+        this.statusCode = statusCode;
     }
 
 }

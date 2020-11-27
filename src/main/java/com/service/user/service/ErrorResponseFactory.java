@@ -12,7 +12,7 @@ public class ErrorResponseFactory {
     public ErrorResponse createErrorResponse(ErrorMessages errorMessages) {
         return ErrorResponse.builder()
                 .timeStamp(new Date())
-                .message(errorMessages.getErrorMessage())
+                .message(errorMessages.getMessage())
                 .build();
     }
 

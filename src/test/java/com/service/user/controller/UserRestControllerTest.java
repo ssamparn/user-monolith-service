@@ -90,7 +90,7 @@ class UserRestControllerTest {
                 .content(request))
                 .andReturn();
 
-        Assertions.assertEquals(ErrorMessages.MISSING_REQUIRED_FIELD.getErrorCode().value(), mvcResult.getResponse().getStatus());
+        Assertions.assertEquals(ErrorMessages.MISSING_REQUIRED_FIELD.getStatusCode().value(), mvcResult.getResponse().getStatus());
     }
 
     @Test

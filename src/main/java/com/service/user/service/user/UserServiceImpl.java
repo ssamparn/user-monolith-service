@@ -6,7 +6,6 @@ import com.service.user.entity.UserEntity;
 import com.service.user.model.request.UserAddress;
 import com.service.user.model.request.UserDetailsRequest;
 import com.service.user.model.request.UserUpdateRequest;
-import com.service.user.model.response.exception.ErrorMessages;
 import com.service.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,6 +19,8 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
+import static com.service.user.model.response.exception.ErrorMessages.MISSING_REQUIRED_FIELD;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -49,7 +50,12 @@ public class UserServiceImpl implements UserService {
     public UserEntity createUser(UserDetailsRequest userDetailsRequest) {
 
         if (userDetailsRequest.getFirstName().isEmpty() || userDetailsRequest.getLastName().isEmpty() || userDetailsRequest.getEmail().isEmpty()) {
-            throw new UserServiceException(ErrorMessages.MISSING_REQUIRED_FIELD.getErrorMessage());
+            throw new UserServiceException(MISSING_REQUIRED_FIELD.getMessage());
+        }
+
+        UserEntity userEntityByEmail = userRepository.findUserByEmail(userDetailsRequest.getEmail());
+        if (userEntityByEmail != null) {
+            throw new RuntimeException("Record already exists");
         }
 
         UserEntity userEntity = populateUserEntity(userDetailsRequest);
