@@ -53,11 +53,6 @@ public class UserServiceImpl implements UserService {
             throw new UserServiceException(MISSING_REQUIRED_FIELD.getMessage());
         }
 
-        UserEntity userEntityByEmail = userRepository.findUserByEmail(userDetailsRequest.getEmail());
-        if (userEntityByEmail != null) {
-            throw new RuntimeException("Record already exists");
-        }
-
         UserEntity userEntity = populateUserEntity(userDetailsRequest);
 
         UserEntity savedUserDetails = userRepository.save(userEntity);
