@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.service.user.config.AppContext;
 import com.service.user.entity.UserEntity;
 import com.service.user.model.request.UserLoginRequest;
-import com.service.user.properties.SecurityConstants;
 import com.service.user.service.user.UserService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -21,6 +20,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
+import static com.service.user.security.constants.SecurityConstants.AUTH_HEADER_KEY;
+import static com.service.user.security.constants.SecurityConstants.EXPIRATION_TIME;
+import static com.service.user.security.constants.SecurityConstants.TOKEN_BEARER_KEY;
+import static com.service.user.security.constants.SecurityConstants.getTokenSecret;
+
 public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     private final AuthenticationManager authenticationManager;
@@ -30,13 +34,14 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     }
 
     @Override
-    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) {
+    public Authentication attemptAuthentication(final HttpServletRequest request,
+                                                final HttpServletResponse response) {
 
         try {
             UserLoginRequest credentials = new ObjectMapper().readValue(request.getInputStream(), UserLoginRequest.class);
 
-            return authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(credentials.getEmail(), credentials.getPassword(), new ArrayList<>())
+            return authenticationManager
+                    .authenticate(new UsernamePasswordAuthenticationToken(credentials.getEmail(), credentials.getPassword(), new ArrayList<>())
             );
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -44,24 +49,24 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     }
 
     @Override
-    protected void successfulAuthentication(HttpServletRequest request,
-                                            HttpServletResponse response,
-                                            FilterChain filterChain,
-                                            Authentication authentication) {
+    protected void successfulAuthentication(final HttpServletRequest request,
+                                            final HttpServletResponse response,
+                                            final FilterChain filterChain,
+                                            final Authentication authentication) {
 
         String userName = ((User) authentication.getPrincipal()).getUsername();
 
         String token = Jwts.builder()
                 .setSubject(userName)
-                .setExpiration(new Date(System.currentTimeMillis() + SecurityConstants.EXPIRATION_TIME))
-                .signWith(SignatureAlgorithm.HS512, SecurityConstants.getTokenSecret())
+                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
+                .signWith(SignatureAlgorithm.HS512, getTokenSecret())
                 .compact();
 
         UserService userService = (UserService) AppContext.getBean("userServiceImpl");
         UserEntity entity = userService.getUserByUserName(userName);
 
-        response.addHeader(SecurityConstants.HEADER_STRING, SecurityConstants.TOKEN_PREFIX + token);
-        response.addHeader("UserId", entity.getUserId().toString());
+        response.addHeader(AUTH_HEADER_KEY, String.format("%s%s", TOKEN_BEARER_KEY, token));
+        response.addHeader("UserId", entity.getUserId());
     }
 
 }

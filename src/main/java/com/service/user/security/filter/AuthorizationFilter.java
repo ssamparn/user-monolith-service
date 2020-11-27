@@ -1,6 +1,6 @@
 package com.service.user.security.filter;
 
-import com.service.user.properties.SecurityConstants;
+import com.service.user.security.constants.SecurityConstants;
 import io.jsonwebtoken.Jwts;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -25,9 +25,9 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws IOException, ServletException {
 
-        String header = request.getHeader(SecurityConstants.HEADER_STRING);
+        String header = request.getHeader(SecurityConstants.AUTH_HEADER_KEY);
 
-        if (header == null || !header.startsWith(SecurityConstants.TOKEN_PREFIX)) {
+        if (header == null || !header.startsWith(SecurityConstants.TOKEN_BEARER_KEY)) {
             filterChain.doFilter(request, response);
             return;
         }
@@ -36,15 +36,13 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
 
         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
         filterChain.doFilter(request, response);
-
-
     }
 
     private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
-        String token = request.getHeader(SecurityConstants.HEADER_STRING);
+        String token = request.getHeader(SecurityConstants.AUTH_HEADER_KEY);
 
         if (token != null) {
-            token = token.replace(SecurityConstants.TOKEN_PREFIX, "");
+            token = token.replace(SecurityConstants.TOKEN_BEARER_KEY, "");
 
             String user = Jwts.parser()
                     .setSigningKey(SecurityConstants.getTokenSecret())

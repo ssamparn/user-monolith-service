@@ -2,8 +2,8 @@ package com.service.user.config.security;
 
 import com.service.user.security.filter.AuthenticationFilter;
 import com.service.user.security.filter.AuthorizationFilter;
-import com.service.user.properties.SecurityConstants;
 import com.service.user.service.user.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -12,12 +12,16 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import static com.service.user.security.constants.SecurityConstants.H2_CONSOLE_PATH;
+import static com.service.user.security.constants.SecurityConstants.SIGNUP_URL_PATH;
+
 @EnableWebSecurity
 public class UserServiceWebSecurity extends WebSecurityConfigurerAdapter {
 
     private final UserService userService;
     private final BCryptPasswordEncoder passwordEncoder;
 
+    @Autowired
     public UserServiceWebSecurity(UserService userService, BCryptPasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
@@ -25,25 +29,27 @@ public class UserServiceWebSecurity extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.csrf()
-                .disable().authorizeRequests()
-                .antMatchers(HttpMethod.POST, SecurityConstants.SIGNUP_URL)
-                .permitAll()
-                .antMatchers(SecurityConstants.H2_CONSOLE)
-                .permitAll()
-                .anyRequest().authenticated()
+        httpSecurity.csrf().disable().authorizeRequests()
+                .antMatchers(HttpMethod.POST, SIGNUP_URL_PATH)
+                    .permitAll()
+                .antMatchers(H2_CONSOLE_PATH)
+                    .permitAll()
+                .anyRequest()
+                    .authenticated()
                 .and()
-                .addFilter(getAuthenticationFilter())
-                .addFilter(getAuthorizationFilter())
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                    .addFilter(getAuthenticationFilter())
+                    .addFilter(getAuthorizationFilter())
+                    .sessionManagement()
+                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         httpSecurity.headers().frameOptions().disable();
     }
 
     @Override
-    public void configure(AuthenticationManagerBuilder authenticationManager) throws Exception {
-        authenticationManager.userDetailsService(userService).passwordEncoder(passwordEncoder);
+    public void configure(AuthenticationManagerBuilder authManager) throws Exception {
+        authManager
+                .userDetailsService(userService)
+                .passwordEncoder(passwordEncoder);
     }
 
     private AuthenticationFilter getAuthenticationFilter() throws Exception {
