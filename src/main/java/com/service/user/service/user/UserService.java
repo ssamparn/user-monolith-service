@@ -20,7 +20,7 @@ public interface UserService extends UserDetailsService {
 
     void deleteUser(String userId);
 
-    List<UserEntity> getAllUsers(int pageNo, int noOfUsers);
+    List<UserEntity> getAllUsers(int page, int limit);
 
     List<AddressEntity> getAddressesByUserId(String userId);
 }

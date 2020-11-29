@@ -87,12 +87,12 @@ public class UserRestController {
     }
 
     @GetMapping
-    public ResponseEntity<List<UserEntity>> getAllUsers(@RequestParam(value = "pageNo", defaultValue = "0") Integer pageNo,
-                                                 @RequestParam(value = "noOfUsers", defaultValue = "2") Integer noOfUsers) {
+    public ResponseEntity<List<UserEntity>> getAllUsers(@RequestParam(value = "page", defaultValue = "1") Integer page,
+                                                 @RequestParam(value = "limit", defaultValue = "2") Integer limit) {
 
         log.info("Get All Users endpoint is called");
 
-        List<UserEntity> allUsers = userService.getAllUsers(pageNo, noOfUsers);
+        List<UserEntity> allUsers = userService.getAllUsers(page, limit);
 
         return new ResponseEntity<>(allUsers, HttpStatus.OK);
     }

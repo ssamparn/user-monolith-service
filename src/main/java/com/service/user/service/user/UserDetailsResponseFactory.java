@@ -44,24 +44,21 @@ public class UserDetailsResponseFactory {
     }
 
     public UserDetailsResponse createGetUserDetailsResponse(UserEntity userEntity) {
-        UserDetailsResponse response = new UserDetailsResponse();
-
-        response.setFirstName(userEntity.getFirstName());
-        response.setLastName(userEntity.getLastName());
-        response.setEmail(userEntity.getEmail());
-
-        return response;
+        return UserDetailsResponse.builder()
+                .userId(userEntity.getUserId())
+                .firstName(userEntity.getFirstName())
+                .lastName(userEntity.getLastName())
+                .email(userEntity.getEmail())
+                .build();
     }
 
     public UserUpdationResponse createUserUpdationResponse(UserEntity updatedUserEntity) {
-        UserUpdationResponse response = new UserUpdationResponse();
-
-        response.setEmail(updatedUserEntity.getEmail());
-        response.setFirstName(updatedUserEntity.getFirstName());
-        response.setLastName(updatedUserEntity.getLastName());
-        response.setUserId(updatedUserEntity.getUserId());
-
-        return response;
+        return UserUpdationResponse.builder()
+                .firstName(updatedUserEntity.getFirstName())
+                .lastName(updatedUserEntity.getLastName())
+                .email(updatedUserEntity.getEmail())
+                .userId(updatedUserEntity.getUserId())
+                .build();
     }
 
 

@@ -1,11 +1,13 @@
 package com.service.user.model.response;
 
+import lombok.Builder;
 import lombok.Data;
-import org.springframework.hateoas.RepresentationModel;
 
 @Data
+@Builder
 public class UserDetailsResponse {
 
+    private String userId;
     private String firstName;
     private String lastName;
     private String email;

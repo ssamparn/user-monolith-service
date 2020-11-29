@@ -5,10 +5,8 @@ import lombok.*;
 import java.util.Date;
 
 @Data
-@AllArgsConstructor
 @Builder
-@EqualsAndHashCode
-@ToString
+@AllArgsConstructor
 public class ErrorResponse {
 
     private Date timeStamp;

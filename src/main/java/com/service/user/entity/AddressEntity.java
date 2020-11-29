@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Data
-@Entity(name = "Addresses")
+@Entity
 @Table(name = "ADDRESSES", uniqueConstraints = {
         @UniqueConstraint(columnNames = "ADDRESS_ID")
 })
@@ -22,22 +22,22 @@ public class AddressEntity implements Serializable {
     @Column(name = "INTERNAL_ADDRESS_ID", unique = true, nullable = false, updatable = false)
     private Long id;
 
-    @Column(name = "ADDRESS_ID", unique = true, nullable = false)
+    @Column(name = "ADDRESS_ID", length = 50, unique = true, nullable = false)
     private String addressId;
 
-    @Column(name = "CITY_NAME", nullable = false)
+    @Column(name = "CITY_NAME", length = 15, nullable = false)
     private String city;
 
-    @Column(name = "COUNTRY_NAME", nullable = false)
+    @Column(name = "COUNTRY_NAME", length = 15, nullable = false)
     private String country;
 
-    @Column(name = "STREET_NAME", nullable = false)
+    @Column(name = "STREET_NAME", length = 100, nullable = false)
     private String streetName;
 
-    @Column(name = "POSTAL_CODE", nullable = false)
+    @Column(name = "POSTAL_CODE", length = 10, nullable = false)
     private String postalCode;
 
-    @Column(name = "ADDRESS_TYPE", nullable = false)
+    @Column(name = "ADDRESS_TYPE", length = 10, nullable = false)
     private String type;
 
     @ManyToOne(targetEntity = UserEntity.class)

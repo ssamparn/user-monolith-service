@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Data
-@Entity(name = "Users")
+@Entity
 @Table(name = "USERS", uniqueConstraints = {
         @UniqueConstraint(columnNames = "USER_ID"),
         @UniqueConstraint(columnNames = "USER_EMAIL_ID")
