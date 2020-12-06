@@ -26,7 +26,7 @@ public class AuthorityEntity implements Serializable {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "INTERNAL_AUTHORITY_ID")
     private long id;
 

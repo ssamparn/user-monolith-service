@@ -18,7 +18,7 @@ public class AddressEntity implements Serializable {
     private static final long serialVersionUID = 5313493413859894403L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "INTERNAL_ADDRESS_ID", unique = true, nullable = false, updatable = false)
     private Long id;
 

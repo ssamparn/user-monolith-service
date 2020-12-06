@@ -2,6 +2,7 @@ package com.service.user.init;
 
 import com.service.user.entity.AuthorityEntity;
 import com.service.user.entity.RoleEntity;
+import com.service.user.entity.UserEntity;
 import com.service.user.repository.AuthorityRepository;
 import com.service.user.repository.RoleRepository;
 import com.service.user.repository.UserRepository;
@@ -15,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.UUID;
 
 @Slf4j
 @Component
@@ -49,16 +51,17 @@ public class UsersInit {
             return;
         }
 
-//        UserEntity adminUserEntity = new UserEntity();
-//        adminUserEntity.setFirstName("Sasha");
-//        adminUserEntity.setLastName("Saman");
-//        adminUserEntity.setEmail("test.com");
-//        adminUserEntity.setEmailVerificationStatus(true);
-//        adminUserEntity.setUserId(UUID.randomUUID().toString());
-//        adminUserEntity.setEncryptedPassword(passwordEncoder.encode("12345678"));
-//        adminUserEntity.setRoles(Arrays.asList(roleAdmin));
-////
-//        userRepository.save(adminUserEntity);
+        UserEntity adminUserEntity = new UserEntity();
+        adminUserEntity.setId(6l);
+        adminUserEntity.setFirstName("Sasha");
+        adminUserEntity.setLastName("Saman");
+        adminUserEntity.setEmail("test.com");
+        adminUserEntity.setEmailVerificationStatus(true);
+        adminUserEntity.setUserId(UUID.randomUUID().toString());
+        adminUserEntity.setEncryptedPassword(passwordEncoder.encode("12345678"));
+        adminUserEntity.setRoles(Arrays.asList(roleAdmin));
+
+        userRepository.save(adminUserEntity);
     }
 
     @Transactional
