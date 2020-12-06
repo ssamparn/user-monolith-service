@@ -4,13 +4,26 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Getter;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 
 @Data
 @Entity
-@Table(name = "USERS", uniqueConstraints = {
+@Table(name = "users", uniqueConstraints = {
         @UniqueConstraint(columnNames = "USER_ID"),
         @UniqueConstraint(columnNames = "USER_EMAIL_ID")
 })
@@ -20,7 +33,7 @@ public class UserEntity implements Serializable {
     private static final long serialVersionUID = 1798070786993154676L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "INTERNAL_USER_ID", unique = true, nullable = false)
     private Long id;
 
@@ -48,5 +61,11 @@ public class UserEntity implements Serializable {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "USER_ADDRESS_ID")
     private List<AddressEntity> addresses;
+
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @JoinTable(name = "users_roles",
+            joinColumns = @JoinColumn(name = "USERS_ID", referencedColumnName = "INTERNAL_USER_ID"),
+            inverseJoinColumns = @JoinColumn(name = "ROLES_ID", referencedColumnName = "INTERNAL_ROLE_ID"))
+    private Collection<RoleEntity> roles;
 
 }

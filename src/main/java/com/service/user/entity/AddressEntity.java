@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 @Data
 @Entity
-@Table(name = "ADDRESSES", uniqueConstraints = {
+@Table(name = "addresses", uniqueConstraints = {
         @UniqueConstraint(columnNames = "ADDRESS_ID")
 })
 public class AddressEntity implements Serializable {
