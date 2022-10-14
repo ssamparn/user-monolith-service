@@ -19,7 +19,7 @@ public interface UserRepository extends PagingAndSortingRepository<UserEntity, L
 
     UserEntity findUserByUserId(String userId);
 
-    @Query(value = "select * from Users u where u.EMAIL_VERIFICATION_STATUS = 'true'", nativeQuery = true)
+    @Query(value = "select * from Users u where u.EMAIL_VERIFICATION_STATUS = TRUE", nativeQuery = true)
     Page<UserEntity> findAllUsersWithConfirmedEmailAddress(Pageable pageableRequest);
 
     @Query(value = "select * from Users u where u.USER_FIRST_NAME = ?1", nativeQuery = true)

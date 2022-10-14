@@ -13,7 +13,7 @@ public class AddressDetailsResponseFactory {
         AddressResponse addressResponse = new AddressResponse();
         addressResponse.setAddressId(addressEntityByAddressId.getAddressId());
         addressResponse.setCity(addressEntityByAddressId.getCity());
-        addressResponse.add(new Link("addresses" + "/" + addressEntityByAddressId.getAddressId()));
+        addressResponse.add(Link.of("addresses" + "/" + addressEntityByAddressId.getAddressId()));
 
         return addressResponse;
     }

@@ -35,7 +35,7 @@ public class UserDetailsResponseFactory {
             AddressResponse addressResponse = new AddressResponse();
             addressResponse.setAddressId(addressEntity.getAddressId());
             addressResponse.setCity(addressEntity.getCity());
-            addressResponse.add(new Link(userEntity.getUserId() + "/" + "addresses" + "/" + addressEntity.getAddressId()));
+            addressResponse.add(Link.of(userEntity.getUserId() + "/" + "addresses" + "/" + addressEntity.getAddressId()));
 
             addressResponseList.add(addressResponse);
         });
@@ -69,7 +69,7 @@ public class UserDetailsResponseFactory {
             AddressResponse addressResponse = new AddressResponse();
             addressResponse.setCity(addressEntity.getCity());
             addressResponse.setAddressId(addressEntity.getAddressId());
-            addressResponse.add(new Link("addresses" + "/" + addressEntity.getAddressId()));
+            addressResponse.add(Link.of("addresses" + "/" + addressEntity.getAddressId()));
             addressResponseList.add(addressResponse);
         }
 

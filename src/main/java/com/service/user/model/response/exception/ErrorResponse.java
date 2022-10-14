@@ -1,6 +1,9 @@
 package com.service.user.model.response.exception;
 
-import lombok.*;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 
 import java.util.Date;
 
