@@ -13,7 +13,7 @@
 	<name>Monolithic User Service</name>
 
 	<groupId>com.service.user</groupId>
-	<artifactId>user-service</artifactId>
+	<artifactId>user-monolith-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
 	<properties>
@@ -107,5 +107,6 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+		<finalName>${project.artifactId}</finalName>
 	</build>
 </project>
