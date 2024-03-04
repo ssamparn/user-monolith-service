@@ -38,13 +38,11 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     @Override
     public Authentication attemptAuthentication(final HttpServletRequest request,
                                                 final HttpServletResponse response) {
-
         try {
             UserLoginRequest credentials = new ObjectMapper().readValue(request.getInputStream(), UserLoginRequest.class);
+            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(credentials.getEmail(), credentials.getPassword(), new ArrayList<>());
 
-            return getAuthenticationManager()
-                    .authenticate(new UsernamePasswordAuthenticationToken(credentials.getEmail(), credentials.getPassword(), new ArrayList<>())
-            );
+            return getAuthenticationManager().authenticate(authenticationToken);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -55,7 +53,6 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
                                             final HttpServletResponse response,
                                             final FilterChain filterChain,
                                             final Authentication authentication) {
-
         byte[] secretKeyBytes = Base64.getEncoder().encode(getTokenSecret().getBytes());
         SecretKey secretKey = new SecretKeySpec(secretKeyBytes, SignatureAlgorithm.HS512.getJcaName());
         Instant now = Instant.now();

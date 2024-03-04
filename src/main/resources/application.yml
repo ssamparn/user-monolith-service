@@ -31,7 +31,7 @@ user.service:
   authorization:
     token.prefix: Bearer
     header.string: Authorization
-    token.secret: jf9i4jgu83nfl0
+    token.secret: jf9i4jgu83nfl0dkjf834tnfvero349jrfkewniowe8utr034jgfnoiejrg
 
 baseURI: http://localhost
 basePath: v1

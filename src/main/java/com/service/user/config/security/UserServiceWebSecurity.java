@@ -30,17 +30,20 @@ public class UserServiceWebSecurity {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
-        // Used for user authentication or user login
+        // for user authentication or user login
         AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
         authenticationManagerBuilder
                 .userDetailsService(userService)
                 .passwordEncoder(passwordEncoder);
-
         AuthenticationManager authenticationManager = authenticationManagerBuilder.build();
+
+        // for custom login page
+        AuthenticationFilter authenticationFilter = new AuthenticationFilter(authenticationManager);
+        authenticationFilter.setFilterProcessesUrl("/v1/users/login");
 
         http
                 .headers(header -> header.frameOptions(Customizer.withDefaults()).disable())
+                .cors(AbstractHttpConfigurer::disable)
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.POST, SIGNUP_URL_PATH).permitAll()
@@ -48,7 +51,7 @@ public class UserServiceWebSecurity {
                 .anyRequest()
                     .authenticated())
                 .authenticationManager(authenticationManager)
-                .addFilter(new AuthenticationFilter(authenticationManager))
+                .addFilter(authenticationFilter)
                 .addFilter(new AuthorizationFilter(authenticationManager))
                 .sessionManagement(sessionManagement -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
